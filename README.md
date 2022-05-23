@@ -46,7 +46,7 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
 
 - []  search a pokémon by name and by ID
   - [] Html: input + button (+ onclick)
-  - [] 
+  - [] get info from input and put it in the function
 - [] 
 - [] 
 - [] 
