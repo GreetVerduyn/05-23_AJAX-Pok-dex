@@ -2,5 +2,19 @@
   background-color: red;
   color: #fff;
   font-size: 16px;
+  display: flex;
+  height: 150px;
+  flex-wrap: wrap;
+
+  .top-left {
+    flex: 70;
+  }
+  .top-right {
+    flex: 30;
+  }
+}
+input {
+  alignment: right;
+  height: 30px;
 }
 

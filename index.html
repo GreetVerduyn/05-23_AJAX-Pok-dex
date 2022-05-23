@@ -7,13 +7,49 @@
 </head>
 <body>
 <div class="top">
-<p class="tex searchbutton"> Enter the name or the Pokédex-number of the Pokémon you're looking for</p>
-<input id="searchtext" type="search" name="=?">
-<button onclick="search()" id="searchbutton">search</button>
-    <img src="https://assets.pokemon.com/assets/cms2-nl-nl/img/misc/gus/buttons/logo-pokemon-79x45.png" alt="site_slug" class="gus-bounce">
+    <div class="top-left">
+        <p class="textSearchButton"> Enter the name or the Pokédex-number of the Pokémon you're looking for</p>
+        <div>
+            <input id="searchText" type="search">
+            <button onclick="search()" id="searchButton">search</button>
+        </div>
+    </div>
+    <div class="top-right">
+        <img id=logo src="images/logo-pokemon.png" alt="Pokémon">
+    </div>
+
+
+
 </div>
+<div class ="Pokemons" id="Pokemons">
+<template id="infoPokemon">
+    <div>
+        <img class="pokemonImage" src="" alt="image">
+    </div>
+    <div class="pokemonId">response.id </div>
+    <div class="pokemonName">response.name</div>
+    <div class="pokemonMoves">
+        <ul>
+            <li id="move1">response.moves[1]name</li>
+            <li id="move2"></li>
+            <li id="move3"></li>
+            <li id="move4"></li>
+        </ul>
+    </div>
+    <div class="prevEvol">
+        <ul>
+            <li id="prevEvolName"></li>
+            <li id="prevEvolImage"></li>
+        </ul>
+
+    </div>
+</template>
+</div>
+<!--
 <div class="pokemon">
-    <div class="name"></div>
+
+
+    <div class="name" ></div>
     <div class="pokemonID"></div>
     <div class="pokemonImage"></div>
     <div class="pokemonMoves">
@@ -31,6 +67,7 @@
     </div>
 
 </div>
+-->
 
 <script src="script.js"></script>
 </body>
