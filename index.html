@@ -6,6 +6,30 @@
     <title>Pokedex</title>
 </head>
 <body>
+<div class="top">
+<p class="tex searchbutton"> Enter the name or the Pokédex-number of the Pokémon you're looking for</p>
+<input id="searchtext" type="search" name="=?">
+<button onclick="search()" id="searchbutton">search</button>
+</div>
+<div class="pokemon">
+    <div class="name"></div>
+    <div class="pokemonID"></div>
+    <div class="pokemonImage"></div>
+    <div class="pokemonMoves">
+        <ul>
+            <li id="move1"></li>
+            <li id="move2"></li>
+            <li id="move3"></li>
+            <li id="move4"></li>
+        </ul>
+    </div>
+    <div class="prevEvol">
+        <li id="prevEvolName"></li>
+        <li id=" prevEvolImage"></li>
+
+    </div>
+
+</div>
 
 <script src="script.js"></script>
 </body>

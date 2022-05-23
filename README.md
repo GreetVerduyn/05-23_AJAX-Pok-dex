@@ -36,10 +36,17 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
 - [x] add HTMl, JS, SCSS, read me, .ignore
 - [x] read info
 - [x] make file public
-- [x] fetch data (url)
-- [] 
-- [] 
-- [] 
+  - [x] fetch data (function (await fetch url, await respons))
+    - const getData = async () => {
+         const data = await fetch(baseUrl + 'pokemon');
+         const main = await data.json();
+         console.log(main);
+    return main;
+    }
+
+- []  search a pokémon by name and by ID
+  - [] Html: input + button (+ onclick)
+  - [] 
 - [] 
 - [] 
 - [] 

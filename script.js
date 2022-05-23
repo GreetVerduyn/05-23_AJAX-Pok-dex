@@ -7,14 +7,22 @@ const baseUrl = "https://pokeapi.co/api/v2/";
 //   .then(data => console.log(data));
 
 
-(() => {
-    async function getData(){
-        let data = await fetch(
-            baseUrl + 'pokemon');
-        let main = await data.json();
-        console.log(main);
+ const getData = async (input) => {
+    const data = await fetch(baseUrl + 'pokemon/' + input);
+    const main = await data.json();
+    return main;
+}
 
-    }
-    getData()
-})
-();
+
+function search (){
+     let inputSearch = document.getElementById("searchtext").value;
+   // console.log (inputSearch) OK
+    getData(inputSearch)
+        .then (response => {
+            console.log(response);
+        });
+
+
+
+};
+
