@@ -106,7 +106,6 @@ function search() {
             ulMoves.appendChild(liMoves);
         }
 
-
         item.querySelector('.pokemonMoves').appendChild(ulMoves);
 
 
