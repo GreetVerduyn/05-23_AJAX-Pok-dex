@@ -34,19 +34,28 @@ function search() {
             getApiData(urlSpecies).then(
                 res => {
                     const urlEvolutionChain = res['evolution_chain'].url;
-                    console.log('speciesResult', res, urlEvolutionChain);
+                    //console.log('speciesResult', res, urlEvolutionChain);
                     getApiData(urlEvolutionChain).then(
                         res => {
-                            //const evolutionDetails = res.chain.evolves_to;
-                            console.log('evolutionChainResult', res);
-                            console.log('evolutionChainResultChain', res.chain['evolves_to']);
-                            const arrayEvolvesTo = res.chain['evolves_to'];
 
-                            if (arrayEvolvesTo.length){
+                            console.log('evolutionChainResult', res);
+                            console.log('evolutionChainResultChain', res.chain);
+                            console.log('basic', res.chain.species.name);
+                            const origin = res.chain;
+
+                            console.log('evolution1', origin['evolves_to'][0].species.name);
+                            const evol1 = origin['evolves_to'][0]
+                            console.log('evolution2', evol1['evolves_to'][0].species.name);
+                            const evol2 = evol1['evolves_to'][0]
+
+
+                            const arrayEvolvesTo = res.chain;
+
+                            if (arrayEvolvesTo.length) {
                                 const evolvesToSpecies = arrayEvolvesTo[0].species.name;
-                                console.log(evolvesToSpecies);
+                                //console.log(evolvesToSpecies);
                             }
-                                }
+                        }
                     )
                 }
             )
