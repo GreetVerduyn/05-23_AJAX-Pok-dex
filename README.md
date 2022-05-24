@@ -47,7 +47,7 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
 - [x] Html: input + button (+ onclick)
 - [x] get info from input (fetch) and put it in the function
 - [x] get move from fetch by looping true array (slice 0,4)
-- [] get previous evolution (name + picture)
+- [] get previous evolution (name + picture) finding right API wasn't that clear
 - [] 
 - []  design pokedex
 - [] 

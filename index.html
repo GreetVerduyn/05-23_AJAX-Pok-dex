@@ -8,7 +8,7 @@
 <body>
 <div class="top">
     <div class="top-left">
-        <p class="textSearchButton"> Enter the name or the Pokédex-number of the Pokémon you're looking for</p>
+        <p class="textSearchButton"> Enter the name or the Pokédex-number of the Pokémon you"re looking for</p>
         <div>
             <input id="searchText" type="search">
             <button onclick="search()" id="searchButton">search</button>
@@ -20,9 +20,21 @@
 
 
 </div>
-<div class="pokemons" id="pokemons">
+<div class="pokemonsInfo">
+    <div class="PokemonIni">
+        <p>Pokemon</p>
+        <div class="pokemons" id="pokemons">
+        </div>
+    </div>
+    <div class="pokemonEvo">
+        <p>Evolution</p>
+        <div class="prevEvol" id="prevEvol">
+        </div>
+    </div>
 
 </div>
+
+
 <template id="infoPokemon">
     <div>
         <img class="pokemonImage" src="" alt="image">
@@ -30,13 +42,6 @@
     <div class="pokemonId">response.id</div>
     <div class="pokemonName">response.name</div>
     <div class="pokemonMoves">
-    </div>
-    <div class="prevEvol">
-        <ul>
-            <li id="prevEvolName"></li>
-            <li id="prevEvolImage"></li>
-        </ul>
-
     </div>
 </template>
 <!--
