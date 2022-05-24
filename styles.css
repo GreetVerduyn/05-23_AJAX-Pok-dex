@@ -24,8 +24,26 @@ input {
   height: 30px;
 }
 
-.pokemonImage {
+.picture {
+  background-color: lightblue;
+  margin: 20px;
+  border-radius: 25px;
+}
+.picture .pokemonImage {
   height: 300px;
+}
+.picture .pokemonName {
+  text-align: center;
+  font-size: 40px;
+}
+
+.nameAndId {
+  display: flex;
+}
+
+.idPokemon {
+  text-align: center;
+  font-size: 30px;
 }
 
 .pokemonsInfo {

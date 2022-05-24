@@ -22,12 +22,12 @@
 </div>
 <div class="pokemonsInfo">
     <div class="PokemonIni">
-        <!--<p>Pokemon</p>-->
+        <!--Pokemon-->
         <div class="pokemons" id="pokemons">
         </div>
     </div>
     <div class="pokemonEvo">
-       <!--<p>Evolution</p>-->
+        <!--Evolution-->
         <div class="prevEvol" id="prevEvol">
         </div>
     </div>
@@ -36,11 +36,13 @@
 
 
 <template id="infoPokemon">
-    <div>
+    <div class="picture">
         <img class="pokemonImage" src="" alt="image">
+        <div class="pokemonName">response.name</div>
     </div>
-    <div class="pokemonId">response.id</div>
-    <div class="pokemonName">response.name</div>
+    <div class="idPokemon">
+        <div class="pokemonId">response.id</div>
+    </div>
     <div class="pokemonMoves">
     </div>
 </template>

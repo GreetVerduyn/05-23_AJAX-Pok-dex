@@ -87,7 +87,7 @@ function search() {
         item.querySelector('.pokemonImage').src = image;
         item.querySelector('.pokemonImage').alt = name;
         item.querySelector('.pokemonName').innerHTML = name;
-        item.querySelector('.pokemonId').innerHTML = id;
+        item.querySelector('.pokemonId').innerHTML = `N° ${id}`;
         let ulMoves = document.createElement("ul");
 
         for (let i = 0; i < moves.length; i++) {
