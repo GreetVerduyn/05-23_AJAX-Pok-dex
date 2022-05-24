@@ -1,4 +1,4 @@
-const baseUrl = "https://pokeapi.co/api/v2/";
+const baseUrl = "https://pokeapi.co/api/v2/pokemon/";
 
 
 // fetch('http://example.com/movies.json')
@@ -6,13 +6,8 @@ const baseUrl = "https://pokeapi.co/api/v2/";
 //   .then(data => console.log(data));
 
 
-const getData = async (input) => {
-    const data = await fetch(baseUrl + 'pokemon/' + input);
-    const main = await data.json();
-    return main;
-}
-const getEvolution = async (input) => {
-    const data = await fetch(baseUrl + 'evolution-chain/' + input);
+const getApiData = async (url) => {
+    const data = await fetch(url);
     const main = await data.json();
     return main;
 }
@@ -27,13 +22,36 @@ function search() {
 
     let inputSearch = document.getElementById('searchText').value;
     // console.log (inputSearch) OK
-    getData(inputSearch)
+    getApiData(baseUrl + inputSearch)
         .then(response => {
-                        //console.log(response);
+            console.log('getDataResponse', response);
             let id = response.id;
             let name = response.name;
             let image = response.sprites['front_default'];
             const moves = response.moves.slice(0, 4);
+            renderPokemons(name, id, image, moves, 'pokemons');
+            const urlSpecies = response.species.url;
+            getApiData(urlSpecies).then(
+                res => {
+                    const urlEvolutionChain = res['evolution_chain'].url;
+                    console.log('speciesResult', res, urlEvolutionChain);
+                    getApiData(urlEvolutionChain).then(
+                        res => {
+                            //const evolutionDetails = res.chain.evolves_to;
+                            console.log('evolutionChainResult', res);
+                            console.log('evolutionChainResultChain', res.chain['evolves_to']);
+                            const arrayEvolvesTo = res.chain['evolves_to'];
+
+                            if (arrayEvolvesTo.length){
+                                const evolvesToSpecies = arrayEvolvesTo[0].species.name;
+                                console.log(evolvesToSpecies);
+                            }
+                                }
+                    )
+                }
+            )
+
+
             /*console.log('image', response.sprites);
             console.log('image', response.sprites['front_default']);
 
@@ -41,11 +59,11 @@ function search() {
             console.log(moves[1].move.name);
             console.log(response.moves[1]);
 
-            console.log(response.name);*/
+            console.log(response.name);
             getEvolution(inputSearch)
                 .then(response =>{
-                    //console.log(response);
-                    //console.log(response.chain.evolves_to[0].species.name);
+                   // console.log(response);
+                   // console.log(response.chain.evolves_to[0].species.name);
                     const evolutionName = response.chain.evolves_to[0].species.name;
                     getData(evolutionName)
                         .then (response=>{
@@ -58,6 +76,7 @@ function search() {
 
                 });
             renderPokemons(name, id, image, moves, 'pokemons');
+            */
         });
 
 
@@ -69,13 +88,13 @@ function search() {
         item.querySelector('.pokemonImage').alt = name;
         item.querySelector('.pokemonName').innerHTML = name;
         item.querySelector('.pokemonId').innerHTML = id;
-        let ulMoves= document.createElement("ul");
+        let ulMoves = document.createElement("ul");
 
-        for (let i=0; i< moves.length; i++ ){
+        for (let i = 0; i < moves.length; i++) {
             let liMoves = document.createElement("li");
-            liMoves.innerHTML= moves[i].move.name;
+            liMoves.innerHTML = moves[i].move.name;
 
-           ulMoves.appendChild(liMoves);
+            ulMoves.appendChild(liMoves);
         }
 
 
