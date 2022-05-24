@@ -43,13 +43,13 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
          console.log(main);
     return main;
     }
-
-- []  search a pokémon by name and by ID
-  - [] Html: input + button (+ onclick)
-  - [] get info from input and put it in the function
+- [x] search a pokémon by name and by ID
+- [x] Html: input + button (+ onclick)
+- [x] get info from input (fetch) and put it in the function
+- [x] get move from fetch by looping true array (slice 0,4)
+- [] get previous evolution (name + picture)
 - [] 
-- [] 
-- [] 
+- []  design pokedex
 - [] 
 - [] 
 
