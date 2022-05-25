@@ -14,83 +14,145 @@ const getApiData = async (url) => {
 
 
 const infoPokemon = document.getElementById('infoPokemon');
-
+let nameEvolutionStart;
+let nameEvolution1;
+let nameEvolution2;
 
 function search() {
     document.getElementById('pokemons').innerHTML = '';
-    document.getElementById('prevEvol').innerHTML = '';
+    document.getElementById('evolutions').innerHTML = '';
 
     let inputSearch = document.getElementById('searchText').value;
-    // console.log (inputSearch) OK
     getApiData(baseUrl + inputSearch)
         .then(response => {
-            console.log('getDataResponse', response);
             let id = response.id;
             let name = response.name;
             let image = response.sprites['front_default'];
             const moves = response.moves.slice(0, 4);
             renderPokemons(name, id, image, moves, 'pokemons');
             const urlSpecies = response.species.url;
+        })
+}
+function searchEvolutions() {
+     document.getElementById('evolutions').innerHTML = '';
+    let inputSearch = document.getElementById('searchText').value;
+    // console.log (inputSearch) OK
+    getApiData(baseUrl + inputSearch)
+        .then(response => {
+            //console.log('getDataResponse', response);
             getApiData(urlSpecies).then(
-                res => {
-                    const urlEvolutionChain = res['evolution_chain'].url;
-                    //console.log('speciesResult', res, urlEvolutionChain);
+                response => {
+                    const urlEvolutionChain = response['evolution_chain'].url;
+                    //console.log('speciesResult', response, urlEvolutionChain);
                     getApiData(urlEvolutionChain).then(
-                        res => {
+                        response => {
 
-                            console.log('evolutionChainResult', res);
-                            console.log('evolutionChainResultChain', res.chain);
-                            console.log('basic', res.chain.species.name);
-                            const origin = res.chain;
+                            //console.log('evolutionChainResult', res);
+                            console.log('evolutionChainResultChain', response.chain);
+                            //console.log('basic', res.chain.species.name);
+                            const origin = response.chain;
+                            let nameEvolutionStart = origin.species.name;
+                            //console.log('evolution1', origin['evolves_to'][0].species.name);
+                            const evol1 = origin['evolves_to'][0];
+                            let nameEvolution1 = origin['evolves_to'][0].species.name;
+                            //console.log('evolution2', evol1['evolves_to'][0].species.name);
+                            const evol2 = evol1['evolves_to'][0];
+                            let nameEvolution2 = evol1['evolves_to'][0].species.name;
 
-                            console.log('evolution1', origin['evolves_to'][0].species.name);
-                            const evol1 = origin['evolves_to'][0]
-                            console.log('evolution2', evol1['evolves_to'][0].species.name);
-                            const evol2 = evol1['evolves_to'][0]
+                            console.log('nameEvolutionStart', nameEvolutionStart);
+                            console.log('nameEvolution1', nameEvolution1);
+                            console.log('nameEvolution2', nameEvolution2);
 
+                        })
 
-                            const arrayEvolvesTo = res.chain;
-
-                            if (arrayEvolvesTo.length) {
-                                const evolvesToSpecies = arrayEvolvesTo[0].species.name;
-                                //console.log(evolvesToSpecies);
-                            }
-                        }
-                    )
                 }
             )
 
 
-            /*console.log('image', response.sprites);
-            console.log('image', response.sprites['front_default']);
+        })
+}
 
-            console.log(moves[0].move.name);
-            console.log(moves[1].move.name);
-            console.log(response.moves[1]);
 
-            console.log(response.name);
-            getEvolution(inputSearch)
-                .then(response =>{
-                   // console.log(response);
-                   // console.log(response.chain.evolves_to[0].species.name);
-                    const evolutionName = response.chain.evolves_to[0].species.name;
-                    getData(evolutionName)
-                        .then (response=>{
-                            let id = response.id;
-                            let name = response.name;
-                            let image = response.sprites['front_default'];
-                            const moves = response.moves.slice(0, 4);
-                            renderPokemons(evolutionName, id, image, moves, 'prevEvol');
-                        })
+function renderPokemons(name, id, image, moves, container) {
+    const pokemonContainer = document.getElementById(container);
+    const item = infoPokemon.content.cloneNode(true);
 
-                });
-            renderPokemons(name, id, image, moves, 'pokemons');
-            */
-        });
+    item.querySelector('.pokemonImage').src = image;
+    item.querySelector('.pokemonImage').alt = name;
+    item.querySelector('.pokemonName').innerHTML = name;
+    item.querySelector('.pokemonId').innerHTML = `N° ${id}`;
+    let ulMoves = document.createElement("ul");
+    let movesText = document.createElement("p")
 
+
+    for (let i = 0; i < moves.length; i++) {
+        let liMoves = document.createElement("li");
+        liMoves.innerHTML = moves[i].move.name;
+
+        ulMoves.appendChild(liMoves);
+    }
+
+    item.querySelector('.pokemonMoves').appendChild(ulMoves);
+
+
+    //item.querySelector('.front').alt = playCards[i].name;
+
+    pokemonContainer.append(item);
+}
+
+
+
+
+/*
+function search() {
+    document.getElementById('pokemons').innerHTML = '';
+    document.getElementById('evolutions').innerHTML = '';
+
+    let inputSearch = document.getElementById('searchText').value;
+    // console.log (inputSearch) OK
+    getApiData(baseUrl + inputSearch)
+        .then(response => {
+                //console.log('getDataResponse', response);
+                let id = response.id;
+                let name = response.name;
+                let image = response.sprites['front_default'];
+                const moves = response.moves.slice(0, 4);
+                renderPokemons(name, id, image, moves, 'pokemons');
+                const urlSpecies = response.species.url;
+
+                getApiData(urlSpecies).then(
+                    res => {
+                        const urlEvolutionChain = res['evolution_chain'].url;
+                        //console.log('speciesResult', res, urlEvolutionChain);
+                        getApiData(urlEvolutionChain).then(
+                            res => {
+
+                                //console.log('evolutionChainResult', res);
+                                console.log('evolutionChainResultChain', res.chain);
+                                //console.log('basic', res.chain.species.name);
+                                const origin = res.chain;
+                                let nameEvolutionStart = origin.species.name;
+                                //console.log('evolution1', origin['evolves_to'][0].species.name);
+                                const evol1 = origin['evolves_to'][0];
+                                let nameEvolution1 = origin['evolves_to'][0].species.name;
+                                //console.log('evolution2', evol1['evolves_to'][0].species.name);
+                                const evol2 = evol1['evolves_to'][0];
+                                let nameEvolution2 = evol1['evolves_to'][0].species.name;
+
+
+                                console.log('nameEvolutionStart', nameEvolutionStart);
+                                console.log('nameEvolution1', nameEvolution1);
+                                console.log('nameEvolution2', nameEvolution2);
+                            })
+
+                    }
+                )
+
+            }
+        )
 
     function renderPokemons(name, id, image, moves, container) {
-        const pokemons = document.getElementById(container);
+        const pokemonContainer = document.getElementById(container);
         const item = infoPokemon.content.cloneNode(true);
 
         item.querySelector('.pokemonImage').src = image;
@@ -98,6 +160,8 @@ function search() {
         item.querySelector('.pokemonName').innerHTML = name;
         item.querySelector('.pokemonId').innerHTML = `N° ${id}`;
         let ulMoves = document.createElement("ul");
+        let movesText = document.createElement("p")
+
 
         for (let i = 0; i < moves.length; i++) {
             let liMoves = document.createElement("li");
@@ -111,13 +175,8 @@ function search() {
 
         //item.querySelector('.front').alt = playCards[i].name;
 
-
-        /*item.querySelector('.searchButton').addEventListener("click", function ($event) {
-            renderPokemons();
-        })*/
-        pokemons.append(item);
+        pokemonContainer.append(item);
     }
 
-
-};
-
+}
+*/
