@@ -50,4 +50,9 @@ input {
   display: flex;
 }
 
+.evolutions {
+  display: flex;
+  background-color: darkgray;
+}
+
 /*# sourceMappingURL=styles.css.map */

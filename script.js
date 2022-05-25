@@ -20,7 +20,10 @@ let nameEvolution2;
 
 function search() {
     document.getElementById('pokemons').innerHTML = '';
-    document.getElementById('evolutions').innerHTML = '';
+    document.getElementById('evolution1').innerHTML = '';
+    document.getElementById('evolution2').innerHTML = '';
+    document.getElementById('evolution3').innerHTML = '';
+
 
     let inputSearch = document.getElementById('searchText').value;
     getApiData(baseUrl + inputSearch)
@@ -30,15 +33,17 @@ function search() {
             let image = response.sprites['front_default'];
             const moves = response.moves.slice(0, 4);
             renderPokemons(name, id, image, moves, 'pokemons');
-            const urlSpecies = response.species.url;
+
         })
 }
+
 function searchEvolutions() {
-     document.getElementById('evolutions').innerHTML = '';
+    //document.getElementById('evolutions').innerHTML = '';
     let inputSearch = document.getElementById('searchText').value;
     // console.log (inputSearch) OK
     getApiData(baseUrl + inputSearch)
         .then(response => {
+            const urlSpecies = response.species.url;
             //console.log('getDataResponse', response);
             getApiData(urlSpecies).then(
                 response => {
@@ -50,18 +55,39 @@ function searchEvolutions() {
                             //console.log('evolutionChainResult', res);
                             console.log('evolutionChainResultChain', response.chain);
                             //console.log('basic', res.chain.species.name);
+                            const allEvolutions = []
                             const origin = response.chain;
-                            let nameEvolutionStart = origin.species.name;
+                            nameEvolutionStart = origin.species.name;
+                            allEvolutions.push(nameEvolutionStart)
                             //console.log('evolution1', origin['evolves_to'][0].species.name);
-                            const evol1 = origin['evolves_to'][0];
-                            let nameEvolution1 = origin['evolves_to'][0].species.name;
-                            //console.log('evolution2', evol1['evolves_to'][0].species.name);
-                            const evol2 = evol1['evolves_to'][0];
-                            let nameEvolution2 = evol1['evolves_to'][0].species.name;
+                            if (origin['evolves_to'][0]) {
 
-                            console.log('nameEvolutionStart', nameEvolutionStart);
+                                nameEvolution1 = origin['evolves_to'][0].species.name;
+                                allEvolutions.push(nameEvolution1);
+                            }
+                            //console.log('evolution2', evol1['evolves_to'][0].species.name);
+                            if (origin['evolves_to'][0]['evolves_to'][0]) {
+                                const evol2 = origin['evolves_to'][0]['evolves_to'][0];
+                                nameEvolution2 = origin['evolves_to'][0]['evolves_to'][0].species.name;
+                                allEvolutions.push(nameEvolution2);
+                            }
+
+                            for (let i=0; i<allEvolutions.length; i++){
+                                getApiData(baseUrl + allEvolutions[i])
+                                    .then(response => {
+                                        console.log('all evolutions', allEvolutions)
+                                        let id = response.id;
+                                        let name = response.name;
+                                        let image = response.sprites['front_default'];
+                                        const moves = response.moves.slice(0, 4);
+                                        renderPokemons(name, id, image, moves, 'evolution'+(i+1));
+                                    })
+                            }
+                                console.log('nameEvolutionStart', nameEvolutionStart);
                             console.log('nameEvolution1', nameEvolution1);
                             console.log('nameEvolution2', nameEvolution2);
+
+
 
                         })
 
@@ -74,6 +100,7 @@ function searchEvolutions() {
 
 
 function renderPokemons(name, id, image, moves, container) {
+    console.log('container',container)
     const pokemonContainer = document.getElementById(container);
     const item = infoPokemon.content.cloneNode(true);
 
@@ -99,8 +126,6 @@ function renderPokemons(name, id, image, moves, container) {
 
     pokemonContainer.append(item);
 }
-
-
 
 
 /*
