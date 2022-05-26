@@ -11,36 +11,45 @@ const getApiData = async (url) => {
     const main = await data.json();
     return main;
 }
+document.getElementById('searchEvolutions').style.visibility = 'hidden';
+document.getElementById('textEvolutions').style.visibility = 'hidden';
+
+
 
 
 const infoPokemon = document.getElementById('infoPokemon');
 let nameEvolutionStart;
 let nameEvolution1;
 let nameEvolution2;
+let inputSearch;
 
 function search() {
     document.getElementById('pokemons').innerHTML = '';
     document.getElementById('evolution1').innerHTML = '';
     document.getElementById('evolution2').innerHTML = '';
     document.getElementById('evolution3').innerHTML = '';
+    document.getElementById('searchEvolutions').style.visibility = 'visible';
+    document.getElementById('textEvolutions').style.visibility = 'hidden';
 
 
-    let inputSearch = document.getElementById('searchText').value;
+    inputSearch = document.getElementById('searchText').value;
     getApiData(baseUrl + inputSearch)
         .then(response => {
             let id = response.id;
             let name = response.name;
             let image = response.sprites['front_default'];
             const moves = response.moves.slice(0, 4);
+            document.getElementById('searchText').value = '';
             renderPokemons(name, id, image, moves, 'pokemons');
-
         })
 }
 
 function searchEvolutions() {
     //document.getElementById('evolutions').innerHTML = '';
-    let inputSearch = document.getElementById('searchText').value;
+    //let inputSearch = document.getElementById('searchText').value;
     // console.log (inputSearch) OK
+    document.getElementById('searchEvolutions').style.visibility = 'hidden';
+
     getApiData(baseUrl + inputSearch)
         .then(response => {
             const urlSpecies = response.species.url;
@@ -61,9 +70,12 @@ function searchEvolutions() {
                             allEvolutions.push(nameEvolutionStart)
                             //console.log('evolution1', origin['evolves_to'][0].species.name);
                             if (origin['evolves_to'][0]) {
-
+                                document.getElementById('textEvolutions').style.visibility = 'visible';
                                 nameEvolution1 = origin['evolves_to'][0].species.name;
                                 allEvolutions.push(nameEvolution1);
+                            } else
+                            {document.getElementById('textEvolutions').innerHTML= 'No Evolutions';
+                            document.getElementById('textEvolutions').style.visibility = 'visible';
                             }
                             //console.log('evolution2', evol1['evolves_to'][0].species.name);
                             if (origin['evolves_to'][0]['evolves_to'][0]) {
@@ -86,15 +98,9 @@ function searchEvolutions() {
                                 console.log('nameEvolutionStart', nameEvolutionStart);
                             console.log('nameEvolution1', nameEvolution1);
                             console.log('nameEvolution2', nameEvolution2);
-
-
-
                         })
-
                 }
             )
-
-
         })
 }
 
@@ -108,8 +114,9 @@ function renderPokemons(name, id, image, moves, container) {
     item.querySelector('.pokemonImage').alt = name;
     item.querySelector('.pokemonName').innerHTML = name;
     item.querySelector('.pokemonId').innerHTML = `N° ${id}`;
+    item.querySelector('.textMoves').innerHTML= 'Moves';
     let ulMoves = document.createElement("ul");
-    let movesText = document.createElement("p")
+
 
 
     for (let i = 0; i < moves.length; i++) {
@@ -117,6 +124,7 @@ function renderPokemons(name, id, image, moves, container) {
         liMoves.innerHTML = moves[i].move.name;
 
         ulMoves.appendChild(liMoves);
+
     }
 
     item.querySelector('.pokemonMoves').appendChild(ulMoves);

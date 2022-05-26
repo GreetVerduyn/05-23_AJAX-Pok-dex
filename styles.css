@@ -24,6 +24,21 @@ input {
   height: 30px;
 }
 
+.pokemonsInfo {
+  display: flex;
+}
+.pokemonsInfo .pokemonEvo .textEvolutions {
+  font-size: 35px;
+  margin-top: 1px;
+}
+
+#searchEvolutions {
+  height: 35px;
+  font-size: medium;
+  margin-top: 30px;
+}
+
+/*template*/
 .picture {
   background-color: lightblue;
   margin: 20px;
@@ -37,22 +52,30 @@ input {
   font-size: 40px;
 }
 
-.nameAndId {
-  display: flex;
-}
-
 .idPokemon {
   text-align: center;
   font-size: 30px;
+  margin: 30px;
 }
 
-.pokemonsInfo {
+.pokemonMoves {
   display: flex;
+  background-color: sandybrown;
+  border-radius: 25px;
+  font-size: 20px;
+  margin: 30px;
+}
+.pokemonMoves .textMoves {
+  font-size: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .evolutions {
   display: flex;
-  background-color: darkgray;
+  background-color: dodgerblue;
+  margin: 25px;
+  border-radius: 25px;
 }
 
 /*# sourceMappingURL=styles.css.map */

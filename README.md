@@ -47,14 +47,13 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
 - [x] Html: input + button (+ onclick)
 - [x] get info from input (fetch) and put it in the function
 - [x] get move from fetch by looping true array (slice 0,4)
-- [] get previous evolution (name + picture) finding right API wasn't that clear
-  - [] + put info in template
-- []  design pokedex
-  - [] 1 top
-  - [] 2 div wit picture and info pokemon + evolution
-  - [] 
-  - [] 
-  - [] 
+- x[] get previous evolution (name + picture) finding right API wasn't that clear
+  - [x] + put info in template
+- [x]  design pokedex
+  - [x] 1 top
+  - [x] 2 div wit picture and info pokemon + evolution
+  - [x] making enough <div> elements
+add
 
 
 

@@ -27,8 +27,11 @@
         </div>
     </div>
     <div class="pokemonEvo">
-        <button onclick="searchEvolutions()" id="searchEvolutions">search evolution</button>
         <!--Evolution-->
+       <div class="topEvolutions">
+           <button onclick="searchEvolutions()" id="searchEvolutions">search evolution</button>
+           <p class= "textEvolutions" id="textEvolutions">Evolutions</p>
+       </div>
         <div class="evolutions" id="evolutions">
             <div class="evolution" id="evolution1"></div>
             <div class="evolution" id="evolution2"></div>
@@ -50,17 +53,10 @@
         <div class="pokemonId">response.id</div>
     </div>
     <div class="pokemonMoves">
+        <p class="textMoves"></p>
     </div>
 </template>
-<!--
-    <div class="prevEvol">
-        <li id="prevEvolName"></li>
-        <li id=" prevEvolImage"></li>
 
-    </div>
-
-</div>
--->
 
 <script src="script.js"></script>
 </body>

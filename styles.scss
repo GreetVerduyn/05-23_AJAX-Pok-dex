@@ -5,7 +5,7 @@
   height: 150px;
   flex-wrap: wrap;
 
-  .textSearchButton{
+  .textSearchButton {
     font-size: 20px
   }
 
@@ -13,9 +13,11 @@
     flex: 70;
     margin-left: 10px;
   }
+
   .top-right {
     flex: 30;
-    img{
+
+    img {
       height: 120px
     }
   }
@@ -26,34 +28,63 @@ input {
   height: 30px;
 }
 
-.picture{
+.pokemonsInfo {
+  display: flex;
+
+  .pokemonEvo{
+    .textEvolutions{
+      font-size: 35px;
+      margin-top: 1px;
+    }
+
+  }
+}
+#searchEvolutions{
+  height: 35px;
+  font-size: medium;
+  margin-top: 30px;
+}
+
+/*template*/
+
+.picture {
   background-color: lightblue;
   margin: 20px;
-  border-radius: 25px ;
+  border-radius: 25px;
 
-.pokemonImage {
+  .pokemonImage {
     height: 300px;
 
   }
-  .pokemonName{
-   text-align: center;
+  .pokemonName {
+    text-align: center;
     font-size: 40px;
   }
 }
-.nameAndId{
-  display: flex;
 
-
-}
-.idPokemon{
+.idPokemon {
   text-align: center;
   font-size: 30px;
+  margin: 30px;
+}
 
-}
-.pokemonsInfo{
+.pokemonMoves {
   display: flex;
+  background-color: sandybrown;
+  border-radius: 25px;
+  font-size: 20px;
+  margin: 30px;
+
+  .textMoves {
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 }
-.evolutions{
+
+.evolutions {
   display: flex;
-  background-color: darkgray;
+  background-color: dodgerblue;
+  margin: 25px;
+  border-radius: 25px;
 }
