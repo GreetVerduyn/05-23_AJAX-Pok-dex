@@ -55,8 +55,7 @@ _Note: For this exercise, the goal is to keep working on it, until the deadline 
   - [x] making enough <div> elements
 add
 
-
-
+  
 # Extra challenge
 There are a couple of pokemon that don't play with the normal rules, add code so their cases are also handled elegantly.
 
